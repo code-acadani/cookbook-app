@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   # verb "/urls" => "namespace/controllers#action"
 
   namespace :api do
-  	get "/single_recipe_url" => "recipes#single_recipe_method"
-  end
+  	# get "/single_recipe_url" => "recipes#single_recipe_method"
 
-  # get "/api/single_recipe_url" => "api/recipes#single_recipe_method"
+  	get "/recipes" => "recipes#index"
+  	get "/recipes/:id" => "recipes#show"
+  end
 
 end
