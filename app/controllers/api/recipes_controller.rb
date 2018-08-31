@@ -25,4 +25,32 @@ class Api::RecipesController < ApplicationController
 		)
 		render 'show.json.jbuilder'
 	end
+
+	def update
+		# update an existing recipe
+		@recipe = Recipe.find(params[:id])
+
+		@recipe.title = params[:title] || @recipe.title
+		@recipe.chef = params[:chef] || @recipe.chef
+		@recipe.ingredients = params[:ingredients] || @recipe.ingredients
+		@recipe.directions = params[:directions] || @recipe.directions
+		@recipe.prep_time = params[:prep_time] || @recipe.prep_time
+
+		@recipe.save
+		render 'show.json.jbuilder'
+	end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
