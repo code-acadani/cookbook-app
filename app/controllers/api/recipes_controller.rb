@@ -6,6 +6,13 @@ class Api::RecipesController < ApplicationController
 
 	def index
 		@recipes = Recipe.all
+
+		if params[:search]
+			@recipes = Recipe.where("directions LIKE ? OR title LIKE ? OR ingredients LIKE ? OR chef LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:chef]}%")
+		end
+
+		@recipes = @recipes.order(id: :desc)
+
 		render 'index.json.jbuilder'
 	end
 
