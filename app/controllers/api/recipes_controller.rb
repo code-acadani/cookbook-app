@@ -8,10 +8,10 @@ class Api::RecipesController < ApplicationController
 		@recipes = Recipe.all
 
 		if params[:search]
-			@recipes = Recipe.where("directions LIKE ? OR title LIKE ? OR ingredients LIKE ? OR chef LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:chef]}%")
+			@recipes = Recipe.where("directions LIKE ? OR title LIKE ? OR ingredients LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%")
 		end
 
-		@recipes = @recipes.order(id: :desc)
+		@recipes = @recipes.order(id: :asc)
 
 		render 'index.json.jbuilder'
 	end
