@@ -23,14 +23,19 @@ class Api::RecipesController < ApplicationController
 	end
 
 	def create
-		@recipe = Recipe.create(
+		@recipe = Recipe.new(
 			title: params[:title],
-			chef: params[:chef],
 			ingredients: params[:ingredients],
 			directions: params[:directions],
-			prep_time: params[:prep_time]
+			prep_time: params[:prep_time],
+			user_id: current_user.id
 		)
-		render 'show.json.jbuilder'
+
+		if @recipe.save
+			render 'show.json.jbuilder'
+		else
+			render json: {errors: @recipe.errors.full_messages}, status: :unprocessible_entity
+		end
 	end
 
 	def update
@@ -38,7 +43,6 @@ class Api::RecipesController < ApplicationController
 		@recipe = Recipe.find(params[:id])
 
 		@recipe.title = params[:title] || @recipe.title
-		@recipe.chef = params[:chef] || @recipe.chef
 		@recipe.ingredients = params[:ingredients] || @recipe.ingredients
 		@recipe.directions = params[:directions] || @recipe.directions
 		@recipe.prep_time = params[:prep_time] || @recipe.prep_time
