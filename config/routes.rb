@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   # verb "/urls" => "namespace/controllers#action"
 
   namespace :api do
-  	# get "/single_recipe_url" => "recipes#single_recipe_method"
-
   	get "/recipes" => "recipes#index"
   	get "/recipes/:id" => "recipes#show"
   	post "/recipes" => "recipes#create"
@@ -14,5 +12,7 @@ Rails.application.routes.draw do
     post "/users" => "users#create"
     post "/sessions" => "sessions#create"
   end
+
+  get "/recipes" => "recipes#index"
 
 end

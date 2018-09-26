@@ -19,7 +19,8 @@ class Api::RecipesController < ApplicationController
 	def show
 		# @recipe = Recipe.find_by(id: params[:id])
 		@recipe = Recipe.find(params[:id])
-		render 'show.json.jbuilder'
+		# render 'show.json.jbuilder'
+		render 'show.html.erb'
 	end
 
 	def create
