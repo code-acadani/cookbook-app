@@ -29,6 +29,7 @@ class Api::RecipesController < ApplicationController
 			ingredients: params[:ingredients],
 			directions: params[:directions],
 			prep_time: params[:prep_time],
+			image_url: params[:image_url],
 			user_id: current_user.id
 		)
 
