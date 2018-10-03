@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+	before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@recipes = Recipe.all
@@ -25,18 +26,15 @@ class RecipesController < ApplicationController
 	end
 
 	def show
-		@recipe = Recipe.find(params[:id])
 		render 'show.html.erb'
 	end
 
 	def edit
 		@users = User.all
-		@recipe = Recipe.find(params[:id])
 		render 'edit.html.erb'
 	end
 
 	def update
-		@recipe = Recipe.find(params[:id])
 		@recipe.title = params[:title]
 		@recipe.ingredients = params[:ingredients]
 		@recipe.directions = params[:directions]
@@ -48,13 +46,18 @@ class RecipesController < ApplicationController
 	end
 
 	def destroy
-		@recipe = Recipe.find(params[:id])
 		@recipe.destroy
 		redirect_to "/recipes"
 	end
 
 end
 
+
+private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_recipe
+      @recipe = Recipe.find(params[:id])
+    end
 
 
 
